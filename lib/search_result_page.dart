@@ -7,7 +7,7 @@ import 'package:recipe_app/model.dart';
 import 'package:http/http.dart' as http;
 
 class SearchPage extends StatefulWidget {
-  final String ?search;
+  final String search;
   const SearchPage({
     super.key,
     required this.search,
@@ -49,43 +49,16 @@ class _SearchPageState extends State<SearchPage> {
         appBar: AppBar(
           elevation: 0,
           backgroundColor: mobileBackgroundColor,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                  onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                              actions: [
-                                TextButton(
-                                    onPressed: () {},
-                                    child: const Text("Search"))
-                              ],
-                              content: SizedBox(
-                                height: 200,
-                                child: Column(
-                                  children: [
-                                    TextField(
-                                      decoration: InputDecoration(
-                                          hintText: "Search for a recipe",
-                                          hintStyle: GoogleFonts.lato()),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ));
-                  },
-                  icon: const Icon(Icons.search)),
-            )
-          ],
-          title:  Row(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text(" "), Icon(Icons.restaurant_menu)],
+            children: [
+              Text("Search results for ${widget.search}"),
+              const Icon(Icons.restaurant_menu)
+            ],
           ),
-          centerTitle: true,
+         
         ),
-        body: Padding(
+        body:models.isNotEmpty ? Padding(
           padding: const EdgeInsets.all(16.0),
           child: GridView.builder(
               itemCount: models.length,
@@ -113,6 +86,8 @@ class _SearchPageState extends State<SearchPage> {
                       ],
                     ),
                   )),
-        ));
+        ): Center(
+          child: Text("No results for ${widget.search}"),
+        ) );
   }
 }

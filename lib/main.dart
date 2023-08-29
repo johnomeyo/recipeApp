@@ -49,6 +49,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -65,12 +71,16 @@ class _MyHomePageState extends State<MyHomePage> {
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      Navigator.push(
+                                     if(searchController.text.isNotEmpty){
+                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) => SearchPage(
                                                   search:
                                                       searchController.text)));
+                                      // Navigator.pop(context);
+                                      // searchController.clear();
+                                     }                                 
                                     },
                                     child: const Text("Search"))
                               ],
