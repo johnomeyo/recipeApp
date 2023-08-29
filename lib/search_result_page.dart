@@ -2,32 +2,27 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 import 'package:recipe_app/constants.dart';
 import 'package:recipe_app/model.dart';
-import 'package:recipe_app/search_result_page.dart';
+import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: mobileBackgroundColor,
-      ),
-      home: const MyHomePage()));
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class SearchPage extends StatefulWidget {
+  final String ?search;
+  const SearchPage({
+    super.key,
+    required this.search,
+  });
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SearchPageState extends State<SearchPage> {
   List<Model> models = [];
-  final searchController = TextEditingController();
-  final url =
-      "https://api.edamam.com/search?q=chicken&app_id=d12084ee&app_key=9b425f5bb00191f523150c6b80eb1752	&from=0&to=100&calories=591-722&health=alcohol-free";
-  getApiData() async {
+
+  getApiData(search) async {
+    final url =
+        "https://api.edamam.com/search?q=$search&app_id=d12084ee&app_key=9b425f5bb00191f523150c6b80eb1752	&from=0&to=100&calories=591-722&health=alcohol-free";
     var response = await http.get(Uri.parse(url));
     Map json = jsonDecode(response.body);
     json['hits'].forEach((e) {
@@ -45,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    getApiData();
+    getApiData(widget.search);
   }
 
   @override
@@ -64,14 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context) => AlertDialog(
                               actions: [
                                 TextButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => SearchPage(
-                                                  search:
-                                                      searchController.text)));
-                                    },
+                                    onPressed: () {},
                                     child: const Text("Search"))
                               ],
                               content: SizedBox(
@@ -79,7 +67,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                 child: Column(
                                   children: [
                                     TextField(
-                                      controller: searchController,
                                       decoration: InputDecoration(
                                           hintText: "Search for a recipe",
                                           hintStyle: GoogleFonts.lato()),
@@ -92,9 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   icon: const Icon(Icons.search)),
             )
           ],
-          title: const Row(
+          title:  Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text("Food menu"), Icon(Icons.restaurant_menu)],
+            children: [Text(" "), Icon(Icons.restaurant_menu)],
           ),
           centerTitle: true,
         ),
