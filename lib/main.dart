@@ -1,11 +1,17 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:recipe_app/constants.dart';
 import 'package:recipe_app/model.dart';
 
 void main() {
-  runApp(const MaterialApp(home: MyHomePage()));
+  runApp(MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: mobileBackgroundColor,
+      ),
+      home: const MyHomePage()));
 }
 
 class MyHomePage extends StatefulWidget {
@@ -32,7 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
         models.add(model);
       });
     });
-    print(models);
   }
 
   @override
@@ -44,15 +49,64 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
-        body: GridView.builder(
-            itemCount: models.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
-            itemBuilder: (context, index) => Container(
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(models[index].image))),
-                )));
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: mobileBackgroundColor,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) =>  AlertDialog(
+                          content: Container(
+                            height: 200,
+                            child: const Column(
+                              children: [
+                                TextField(decoration: InputDecoration(hintText:"Search for a recipe"),)
+                              ],
+                            ),
+                          ),
+                        ));
+                  },
+                  icon: const Icon(Icons.search)),
+            )
+          ],
+          title: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Text("Food menu"), Icon(Icons.restaurant_menu)],
+          ),
+          centerTitle: true,
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: GridView.builder(
+              itemCount: models.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
+              itemBuilder: (context, index) => Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey,
+                        image: DecorationImage(
+                            image: NetworkImage(models[index].image))),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(models[index].labelled,
+                              style: GoogleFonts.lato(
+                                textStyle: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ),
+                      ],
+                    ),
+                  )),
+        ));
   }
 }
