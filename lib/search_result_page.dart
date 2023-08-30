@@ -56,38 +56,42 @@ class _SearchPageState extends State<SearchPage> {
               const Icon(Icons.restaurant_menu)
             ],
           ),
-         
         ),
-        body:models.isNotEmpty ? Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: GridView.builder(
-              itemCount: models.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
-              itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey,
-                        image: DecorationImage(
-                            image: NetworkImage(models[index].image))),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(models[index].labelled,
-                              style: GoogleFonts.lato(
-                                textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
-                              )),
-                        ),
-                      ],
-                    ),
-                  )),
-        ): Center(
-          child: Text("No results for ${widget.search}"),
-        ) );
+        body: models.isNotEmpty
+            ? Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: GridView.builder(
+                    itemCount: models.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10),
+                    itemBuilder: (context, index) => Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey,
+                              image: DecorationImage(
+                                  image: NetworkImage(models[index].image))),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(models[index].labelled,
+                                    style: GoogleFonts.lato(
+                                      textStyle: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                              ),
+                            ],
+                          ),
+                        )),
+              )
+            : Center(
+                child: Text("No results for ${widget.search}"),
+              ));
   }
 }
