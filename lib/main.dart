@@ -66,21 +66,28 @@ class _MyHomePageState extends State<MyHomePage> {
               child: IconButton(
                   onPressed: () {
                     showDialog(
+                        barrierDismissible: false,
                         context: context,
                         builder: (context) => AlertDialog(
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                     if(searchController.text.isNotEmpty){
-                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => SearchPage(
-                                                  search:
-                                                      searchController.text)));
-                                      // Navigator.pop(context);
-                                      // searchController.clear();
-                                     }                                 
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text("Cancel")),
+                                TextButton(
+                                    onPressed: () {
+                                      if (searchController.text.isNotEmpty) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    SearchPage(
+                                                        search: searchController
+                                                            .text)));
+
+                                        searchController.clear();
+                                      }
                                     },
                                     child: const Text("Search"))
                               ],
@@ -116,22 +123,35 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisCount: 2, crossAxisSpacing: 10, mainAxisSpacing: 10),
               itemBuilder: (context, index) => Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey,
-                        image: DecorationImage(
-                            image: NetworkImage(models[index].image))),
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.grey.shade300,
+                    ),
+                    // image: DecorationImage(
+                    //     image: NetworkImage(models[index].image))),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        Flexible(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey.shade300,
+                                image: DecorationImage(
+                                    image: NetworkImage(models[index].image),
+                                    fit: BoxFit.cover)),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(models[index].labelled,
-                              style: GoogleFonts.lato(
-                                textStyle: const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
-                              )),
+                          child: SizedBox(
+                            child: Text(models[index].labelled,
+                                style: GoogleFonts.lato(
+                                  textStyle: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
                         ),
                       ],
                     ),

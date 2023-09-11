@@ -36,6 +36,7 @@ class _SearchPageState extends State<SearchPage> {
       });
     });
   }
+  
 
   @override
   void initState() {
@@ -90,8 +91,8 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                         )),
               )
-            : Center(
-                child: Text("No results for ${widget.search}"),
+            : const Center(
+                child: CircularProgressIndicator.adaptive(),
               ));
   }
 }
