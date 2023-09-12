@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/constants.dart';
+import 'package:recipe_app/home.dart';
 import 'package:recipe_app/model.dart';
 import 'package:recipe_app/search_result_page.dart';
 
@@ -12,7 +13,7 @@ void main() {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: mobileBackgroundColor,
       ),
-      home: const MyHomePage()));
+      home: const HomePage()));
 }
 
 class MyHomePage extends StatefulWidget {
@@ -126,8 +127,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.grey.shade300,
                     ),
-                    // image: DecorationImage(
-                    //     image: NetworkImage(models[index].image))),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
