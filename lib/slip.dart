@@ -25,7 +25,7 @@ class Slip extends StatelessWidget {
            child: Row(
             children: [
               Text(style: TextStyle(color:Colors.purple.shade900),"KCB ONGATA RONGAI"),
-              Spacer(),
+              const Spacer(),
               Column(
                 children: [
                   Text(style: TextStyle(color:Colors.purple.shade900),"CREDIT ACCCOUNT DETAILS:"),
@@ -41,7 +41,7 @@ class Slip extends StatelessWidget {
            child: Row(
             children: [
               Text(style: TextStyle(color:Colors.purple.shade900),"Cash payment received  :  "),
-              Spacer(),
+              const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(
                 right: 20),
@@ -54,22 +54,20 @@ class Slip extends StatelessWidget {
                  ),
          ),
          Text(style: TextStyle(color:Colors.purple.shade900),"Kenya Shillings  TEN THOUSAND ONLY"),
-         SizedBox(height: 50,),
+         const SizedBox(height: 50,),
 
-        Container(
-          child:  Column(crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(style: TextStyle(color:Colors.purple.shade900),"PAYMENT DETAILS"),
-              Text(style: TextStyle(color:Colors.purple.shade900),"--------------"),
-              Text(style: TextStyle(color:Colors.purple.shade900),"Credit Account  :  1104513447"),
-              Text(style: TextStyle(color:Colors.purple.shade900),"MMU A/C Name  :  MULTIMEDIA UNIVERSITY OF KENYA"),
-              Text(style: TextStyle(color:Colors.purple.shade900),"Mobile No  :  254769047060"),
-              Text(style: TextStyle(color:Colors.purple.shade900),"Payment Details  :  CIT-223-032-2021 --JOHN OMEYO"),
+        Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(style: TextStyle(color:Colors.purple.shade900),"PAYMENT DETAILS"),
+            Text(style: TextStyle(color:Colors.purple.shade900),"--------------"),
+            Text(style: TextStyle(color:Colors.purple.shade900),"Credit Account  :  1104513447"),
+            Text(style: TextStyle(color:Colors.purple.shade900),"MMU A/C Name  :  MULTIMEDIA UNIVERSITY OF KENYA"),
+            Text(style: TextStyle(color:Colors.purple.shade900),"Mobile No  :  254769047060"),
+            Text(style: TextStyle(color:Colors.purple.shade900),"Payment Details  :  CIT-223-032-2021 --JOHN OMEYO"),
 
 
-              
-            ],
-          ),
+            
+          ],
         )
       ]),
     );

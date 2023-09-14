@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/constants.dart';
+import 'package:recipe_app/search_result_page.dart';
 
 class FeaturedRecipes extends StatelessWidget {
   const FeaturedRecipes(
@@ -9,29 +10,33 @@ class FeaturedRecipes extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.grey.shade300,
-        image:
-            DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              text,
-              style: GoogleFonts.lato(
-                  textStyle: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 20)),
+    return GestureDetector(
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => SearchPage(search: text))),
+      child: Container(
+        height: 200,
+        width: 200,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.grey.shade300,
+          image:
+              DecorationImage(image: NetworkImage(imageUrl), fit: BoxFit.cover),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                text,
+                style: GoogleFonts.lato(
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20)),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -45,14 +50,20 @@ class Categories extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          height: 100,
-          width: 100,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.grey,
-              image: DecorationImage(
-                  image: NetworkImage(imageUrl), fit: BoxFit.cover)),
+        GestureDetector(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SearchPage(search: text))),
+          child: Container(
+            height: 100,
+            width: 100,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: Colors.grey,
+                image: DecorationImage(
+                    image: NetworkImage(imageUrl), fit: BoxFit.cover)),
+          ),
         ),
         Text(
           text,
@@ -71,14 +82,29 @@ class PopularRecipes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          height: 200,
-          width: 150,
-          decoration: BoxDecoration(
-            image: DecorationImage(image: NetworkImage(imageUrl),fit: BoxFit.cover),
-              color: Colors.red, borderRadius: BorderRadius.circular(10)),
+        GestureDetector(
+          onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => SearchPage(search: text))),
+          child: Container(
+            height: 200,
+            width: 150,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: NetworkImage(imageUrl), fit: BoxFit.cover),
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(10)),
+          ),
         ),
-        Text(text),
+        Text(
+          text,
+          style: GoogleFonts.lato(
+              textStyle: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold)),
+        ),
       ],
     );
   }

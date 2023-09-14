@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:recipe_app/constants.dart';
 import 'package:recipe_app/model.dart';
 import 'package:http/http.dart' as http;
+import 'package:recipe_app/web_page.dart';
 
 class SearchPage extends StatefulWidget {
   final String search;
@@ -36,7 +37,6 @@ class _SearchPageState extends State<SearchPage> {
       });
     });
   }
-  
 
   @override
   void initState() {
@@ -51,9 +51,12 @@ class _SearchPageState extends State<SearchPage> {
           elevation: 0,
           backgroundColor: mobileBackgroundColor,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text("Search results for ${widget.search}"),
+              Text(
+                "Search results for ${widget.search}",
+                style: const TextStyle(fontSize: 16),
+              ),
               const Icon(Icons.restaurant_menu)
             ],
           ),
@@ -70,24 +73,36 @@ class _SearchPageState extends State<SearchPage> {
                             mainAxisSpacing: 10),
                     itemBuilder: (context, index) => Container(
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.grey,
-                              image: DecorationImage(
-                                  image: NetworkImage(models[index].image))),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(models[index].labelled,
-                                    style: GoogleFonts.lato(
-                                      textStyle: const TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                              ),
-                            ],
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey.shade300,
+                          ),
+                          child: GestureDetector(
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>WebPage(url: models[index].url) )),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                                        image: DecorationImage(
+                                            image:
+                                                NetworkImage(models[index].image),
+                                            fit: BoxFit.cover)),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(models[index].labelled,
+                                      style: GoogleFonts.lato(
+                                        textStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                ),
+                              ],
+                            ),
                           ),
                         )),
               )
