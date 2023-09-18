@@ -28,7 +28,7 @@ class _SearchPageState extends State<SearchPage> {
     Map json = jsonDecode(response.body);
     json['hits'].forEach((e) {
       Model model = Model(
-          url: e["recipe"]["uri"],
+          url: e["recipe"]["url"],
           image: e['recipe']['image'],
           source: e['recipe']['source'],
           labelled: e['recipe']['label']);
@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
                             color: Colors.grey.shade300,
                           ),
                           child: GestureDetector(
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>WebPage(url: models[index].url) )),
+                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) =>WebPage(url: models[index].url,) )),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
