@@ -4,18 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/constants.dart';
-import 'package:recipe_app/home.dart';
+// import 'package:recipe_app/home.dart';
 import 'package:recipe_app/model.dart';
 import 'package:recipe_app/search_result_page.dart';
+import 'package:recipe_app/splash_screen.dart';
 
-void main() {
+void main()  {
+ 
   runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: mobileBackgroundColor,
       ),
-      home: const HomePage()));
+      home: const SplashScreen()));
 }
+//HomePage
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -134,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Flexible(
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10),
                                 color: Colors.grey.shade300,
                                 image: DecorationImage(
                                     image: NetworkImage(models[index].image),
