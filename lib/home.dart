@@ -13,6 +13,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final searchController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    // searchController.clear();
+    searchController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,9 +80,17 @@ class _HomePageState extends State<HomePage> {
                                 MaterialPageRoute(
                                     builder: (context) => SearchPage(
                                         search: searchController.text)));
+                          } else if (searchController.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                duration: const Duration(seconds: 3),
+                                backgroundColor: Colors.black,
+                                content: Text(
+                                  "The search can't be empty",
+                                  style: GoogleFonts.aBeeZee(
+                                      textStyle:
+                                          const TextStyle(color: Colors.white)),
+                                )));
                           }
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar( SnackBar(duration:const Duration(seconds: 3),backgroundColor: Colors.black ,content: Text("The search can't be empty", style: GoogleFonts.aBeeZee(textStyle:const TextStyle(color: Colors.white)),)));
                         },
                         child: Container(
                             decoration: BoxDecoration(

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe_app/constants.dart';
-// import 'package:recipe_app/home.dart';
+import 'package:recipe_app/home.dart';
 import 'package:recipe_app/model.dart';
 import 'package:recipe_app/search_result_page.dart';
-import 'package:recipe_app/splash_screen.dart';
+// import 'package:recipe_app/splash_screen.dart';
 
 void main()  {
  
@@ -16,7 +16,7 @@ void main()  {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: mobileBackgroundColor,
       ),
-      home: const SplashScreen()));
+      home: const HomePage()));
 }
 //HomePage
 

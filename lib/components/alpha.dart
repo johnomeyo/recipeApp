@@ -93,7 +93,7 @@ class PopularRecipes extends StatelessWidget {
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: NetworkImage(imageUrl), fit: BoxFit.cover),
-                color: Colors.red,
+                color: Colors.grey,
                 borderRadius: BorderRadius.circular(10)),
           ),
         ),
